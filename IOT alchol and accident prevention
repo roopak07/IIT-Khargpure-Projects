@@ -9,7 +9,7 @@
 #define Map A0 // mic analog pin
 #define ap A1 // Alchol pin
 
-int button1_val,button1_val,mic_digital_val,mic_analog_val,alchol_val; //bval_1 button1, bval_2 button 2,mdval- mic didgital,maval-mic analog,aval-alchol 
+int button1_val,button2_val,mic_digital_val,mic_analog_val,alchol_val; //bval_1 button1, bval_2 button 2,mdval- mic didgital,maval-mic analog,aval-alchol 
 /*Library files */
 #include<String.h>
 #define BLYNK_PRINT Serial
@@ -40,7 +40,7 @@ void setup()
  digitalWrite(glp,LOW);
  digitalWrite(blp,LOW);
  digitalWrite(rp,LOW);
- /wifi module
+ //wifi module
  EspSerial.begin(ESP8266_BAUD);
  delay(10);
  Blynk.begin(auth, wifi, ssid, pass);
@@ -51,13 +51,13 @@ void setup()
 }
 void sendSensor()
 {
- mic_Analog_val=analogRead(Ma); //mic analog
- Serial.println(mic_Analog_val);
- mic_dgital_val=digitalRead(mdp); //mic digital 
- Serial.println("mic digital val:"+String(mic_dgital_val));
- Blynk.virtualWrite(V1,mic_dgital_val); // mic digital value to blynk server
+ mic_analog_val=analogRead(Map); //mic analog
+ Serial.println(mic_analog_val);
+ mic_digital_val=digitalRead(mdp); //mic digital 
+ Serial.println("mic digital val:"+String(mic_digital_val));
+ Blynk.virtualWrite(V1,mic_digital_val); // mic digital value to blynk server
  alchol_val=analogRead(ap); // alchol
- Blynk.virtualWrite(V2,aalchol_val); // alchol valueto blynk server
+ Blynk.virtualWrite(V2,alchol_val); // alchol valueto blynk server
  Serial.println("alchol value:"+String(alchol_val));
  Serial.println("Waiting for breath test");
  while(mic_digital_val == 1 )
