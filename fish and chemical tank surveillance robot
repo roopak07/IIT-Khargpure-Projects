@@ -1,0 +1,82 @@
+#include <Servo.h>
+Servo fservo; // servo object for fish tank
+Servo cservo; // servo object for chemical tank
+/* Motors */
+#define mtppin 2 // Motor top positive pin
+#define mtnpin 3 // Motor top negative pin
+#define mbppin 4 // Motor bottom positive pin
+#define mbnpin 5 // Motor bottom negative pin
+/* Stopper Switche */
+#define ssrpin 6 // Stoper switch right 
+#define sslpin 7 // Stoper switch left
+/* servos */
+#define ftspin 8 // fish tank servo
+#define ctspin 9 // chemical tank servo
+
+int pos = 0,ssr_val,ssl_val;
+
+void mstop()
+{
+  digitalWrite(mtppin,LOW);
+  digitalWrite(mtnpin,LOW);
+  digitalWrite(mbppin,LOW);
+  digitalWrite(mbnpin,LOW);
+}
+
+void mrtl() // motor right to left
+{
+  digitalWrite(mtppin,LOW);
+  digitalWrite(mtnpin,HIGH);
+  digitalWrite(mbppin,HIGH);
+  digitalWrite(mbnpin,LOW);
+}
+void mltr() // motor right to left
+{
+  digitalWrite(mtppin,HIGH);
+  digitalWrite(mtnpin,LOW);
+  digitalWrite(mbppin,LOW);
+  digitalWrite(mbnpin,HIGH);
+}
+
+void sangle()
+{
+   fservo.write(45);
+   cservo.write(45);
+   delay(1000);
+   fservo.write(0);
+   cservo.write(0);
+}
+void setup() {
+  Serial.begin(9600);
+  pinMode(mtppin,OUTPUT);
+  pinMode(mtnpin,OUTPUT);
+  pinMode(mbppin,OUTPUT);
+  pinMode(mbnpin,OUTPUT);
+  pinMode(ssrpin,INPUT);
+  pinMode(sslpin,INPUT);
+  fservo.attach(ftspin);
+  cservo.attach(ctspin);
+  
+  fservo.write(0);
+  cservo.write(0);
+  
+}
+
+void loop() {
+  ssr_val=digitalRead(ssrpin);
+  ssl_val=digitalRead(sslpin);
+  if(ssr_val == 1 && ssl_val== 0) // right to left
+  {
+   mstop();
+   delay(5000);
+   sangle();
+   mrtl();
+  }
+  if(ssr_val == 0 && ssl_val== 1) // left to right
+  {
+   mstop();
+   delay(5000);
+   sangle();
+   mltr();
+  }
+}
