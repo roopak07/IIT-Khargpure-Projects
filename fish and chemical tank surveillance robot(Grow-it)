@@ -13,7 +13,7 @@ Servo cservo; // servo object for chemical tank
 #define ftspin 8 // fish tank servo
 #define ctspin 9 // chemical tank servo
 
-int pos = 0,ssr_val,ssl_val;
+int ssr_val,ssl_val;
 
 void mstop()
 {
