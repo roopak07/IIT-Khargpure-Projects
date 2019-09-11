@@ -52,9 +52,9 @@ void setup()
 }
 void loop() 
 {
-  ds=digitalRead(ultras);
+  ds=distance(ultras);
   Serial.println("distance at soil dispancer:"+String(ds)+" Cm");
-  dg=digitalRead(ultragm);
+  dg=distance(ultragm);
   Serial.println("distance at seed dispancer:"+String(ds)+" Cm");
   if(ds <= 3)
   {
