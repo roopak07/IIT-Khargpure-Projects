@@ -8,7 +8,7 @@ Servo servo_obj; // servo object for fish tank
 #define ultras 6 // ultra sonic for soil dispencer
 #define ultragm 7 // ultra sonic for seed dispencer
 
-int t,d,ds,dg; ds- distance at servo, dg- distance at gear motor
+int t,d,ds,dg; //ds- distance at servo, dg- distance at gear motor
 
 void mstop() // motors stop
 {
@@ -52,9 +52,9 @@ void setup()
 }
 void loop() 
 {
-  ds=distance(ultras);
+  ds=disatnce(ultras);
   Serial.println("distance at soil dispancer:"+String(ds)+" Cm");
-  dg=distance(ultragm);
+  dg=disatnce(ultragm);
   Serial.println("distance at seed dispancer:"+String(ds)+" Cm");
   if(ds <= 3)
   {
