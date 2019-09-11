@@ -27,7 +27,7 @@ void sangle()
    servo_obj.write(0);
    delay(200);
 }
-void disatnce(int x)
+int disatnce(int x)
 {
   pinMode(x,OUTPUT);
   digitalWrite(x,LOW);
