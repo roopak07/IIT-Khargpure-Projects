@@ -66,14 +66,16 @@ void setup() {
 void loop() {
   ssr_val=digitalRead(ssrpin);
   ssl_val=digitalRead(sslpin);
-  if(ssr_val == 1 && ssl_val== 0) // right to left
+  Serial.println("Right stopper switch value"+String(ssr_val));
+  Serial.println("left stopper switch value"+String(ssl_val));
+  if(ssr_val == 0 && ssl_val== 1) // right to left
   {
    mstop();
    delay(5000);
    sangle();
    mrtl();
   }
-  if(ssr_val == 0 && ssl_val== 1) // left to right
+  if(ssr_val == 1 && ssl_val== 0) // left to right
   {
    mstop();
    delay(5000);
