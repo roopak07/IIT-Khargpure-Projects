@@ -1,4 +1,4 @@
-#include <Servo.h>
+ #include <Servo.h>
 Servo servo_obj; // servo object for fish tank
 /* Motors */
 #define m1 2 // motor 1
@@ -14,6 +14,7 @@ void mstop() // motors stop
 {
   digitalWrite(m1,LOW);
   digitalWrite(m2,LOW);
+  delay(1000);
 }
 void mf() // motor forward
 {
@@ -29,6 +30,7 @@ void sangle()
 }
 int disatnce(int x)
 {
+  d=0,t=0;
   pinMode(x,OUTPUT);
   digitalWrite(x,LOW);
   delayMicroseconds(2);
@@ -53,13 +55,17 @@ void setup()
 void loop() 
 {
   ds=disatnce(ultras);
-  Serial.println("distance at soil dispancer:"+String(ds)+" Cm");
+  Serial.println("distance at soil:"+String(ds)+" Cm");
+  delay(100);
   dg=disatnce(ultragm);
-  Serial.println("distance at seed dispancer:"+String(ds)+" Cm");
+  Serial.println("distance at seed:"+String(dg)+" Cm");
+  delay(100);
   if(ds <= 3)
   {
+    
    mstop();
    sangle();
+   delay(1000); // wait for 1 sec
    mf();
    delay(2000); // motors forward for 2 seconds
   }
@@ -69,6 +75,7 @@ void loop()
    digitalWrite(gearm,HIGH);
    delay(1000);
    digitalWrite(gearm,LOW);
+   delay(1000); // wait for 1 sec
    mf();
    delay(2000); // motors forward for 2 seconds
   }
