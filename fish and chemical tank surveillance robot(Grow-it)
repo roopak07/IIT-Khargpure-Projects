@@ -45,6 +45,7 @@ void sangle()
    delay(1000);
    fservo.write(0);
    cservo.write(0);
+   delay(1000);
 }
 void setup() {
   Serial.begin(9600);
@@ -59,7 +60,7 @@ void setup() {
   
   fservo.write(0);
   cservo.write(0);
-  
+  mrtl();
 }
 
 void loop() {
