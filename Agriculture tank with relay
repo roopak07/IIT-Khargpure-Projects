@@ -1,90 +1,95 @@
-/* Motors */
-#define mtpin 4 // Motor top positive pin
-#define mbpin 5 // Motor top negative pin
-/* Stopper Switche */
-#define sstpin 10 // Stoper switch right 
-#define ssbpin 11 // Stoper switch left
-/* Ultrasonic sensor */
-#define urpin 5 // ultrasonic sensor right
-#define ulpin 6 // ultrasonic sensor right
-/* led pins */
-#define rlpin 8 // right led
-#define llpin 9 // left led
+#include <Servo.h>
 
-int sst_val,ssb_val,t,d,dr,dl;
+Servo servo_obj; // servo object for fish tank
 
-int distance(int spin)
+#define ultras 3 // ultra sonic for soil dispencer
+#define ultragm 11 // ultra sonic for seed dispencer
+#define servo 9 // servo for sand dispencer
+#define gearm 4// gear motor for seed dispencer
+
+int ds1,ds2,t,d; //ds1- distance at servo, ds2- distance at gear motor
+int distance(int x)
 {
-  pinMode(spin,OUTPUT);
-  digitalWrite(spin,LOW);
+  d=0,t=0;
+  delay(500);
+  pinMode(x,OUTPUT);
+  digitalWrite(x,LOW);
   delayMicroseconds(2);
-  digitalWrite(spin,HIGH);
+  digitalWrite(x,HIGH);
   delayMicroseconds(10);
-  digitalWrite(spin,LOW);
-  pinMode(spin,INPUT);
-  t=pulseIn(spin,HIGH);
+  digitalWrite(x,LOW);
+  pinMode(x,INPUT);
+  t=pulseIn(x,HIGH);
   d=0.034*t/2;
-  Serial.println("distance :"+String(d));
+  Serial.println("distance1:"+String(d)+" Cm");
   return d;
 }
-void mstop()
+
+void sangle()
+
 {
-  digitalWrite(mtpin,LOW);
-  digitalWrite(mbpin,LOW);
+   servo_obj.write(45);
+   delay(1000);
+   servo_obj.write(0);
+   delay(200);
 }
 
-void mttb() // motor top to buttom
+void setup()
 {
-  digitalWrite(mbpin,HIGH);
-}
-void mbtt() // motor buttom to top
-{
-  digitalWrite(mtpin,HIGH);
-}
-
-void setup() {
   Serial.begin(9600);
-  pinMode(mtpin,OUTPUT);
-  pinMode(mbpin,OUTPUT);
-  pinMode(sstpin,INPUT);
-  pinMode(ssbpin,INPUT);
-  pinMode(rlpin,OUTPUT);
-  pinMode(llpin,OUTPUT);
+  pinMode(gearm,OUTPUT);
+  servo_obj.attach(servo);
+  servo_obj.write(0); // initial angle zero
+  digitalWrite(gearm,LOW);
 }
+void loop() 
+{
 
-void loop() {
-  sst_val=digitalRead(sstpin);
-  ssb_val=digitalRead(ssbpin);
-  if(sst_val == 1 && ssb_val== 0) // top to buttom
+  ds1=distance(ultras);
+  Serial.println("distance at soil dispencer:"+String(ds1)+" Cm");
+  ds2=distance(ultragm);
+  Serial.println("distance at seed dispencer:"+String(ds2)+" Cm");
+  delay(500);
+  if(ds1 < 10 )
   {
-   mttb();
-  }
-  if(sst_val == 0 && ssb_val== 1) // buttom to top
-  {
-   mbtt();
-  }
-  dr=distance(urpin);
-  Serial.println("Right distance :"+String(dr));
-  dl=distance(ulpin);
-  Serial.println("Left distance :"+String(dl));
-  if(dr >= 10) // CONDITION FOR RIGHT ULTRASONIC
-  {
-    digitalWrite(rlpin,LOW);
-    Serial.println("Right led OFF");
+   Serial.println("soil dispencing");
+   sangle();
+   while(distance(ultras) < 10)
+   {
+     servo_obj.write(0);
+     Serial.println("distance at soil :"+String(distance(ultras)));
+     Serial.println("soil dispencing is done");
+     delay(500);
+   }
   }
   else
   {
-    digitalWrite(rlpin,HIGH);
-    Serial.println("Right led ON");
+    servo_obj.write(0);
+    Serial.println("servo angle zero");
+    delay(500);
   }
-  if(dl >= 10) // CONDITION FOR LEFT ULTRASONIC
+  
+  if(ds2 < 10 )
   {
-    digitalWrite(llpin,LOW);
-    Serial.println("Left led OFF");
+   Serial.println("seeds dispencing");
+   digitalWrite(gearm,HIGH);
+   delay(1000);
+   digitalWrite(gearm,LOW);
+   delay(1000); // wait for 1 sec
+   
+   while(distance(ultragm) < 10)
+   {
+     digitalWrite(gearm,LOW);
+     Serial.println("distance at seed:"+String(distance(ultragm)));
+     Serial.println("seeding is done");
+     delay(500);
+   }
   }
   else
   {
-    digitalWrite(llpin,HIGH);
-    Serial.println("Left led ON");
+    Serial.println("Motor stop");
+    digitalWrite(gearm,LOW);
+    delay(500);
   }
+  Serial.println("***********************************************************");
 }
