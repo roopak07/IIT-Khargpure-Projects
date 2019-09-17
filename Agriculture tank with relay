@@ -31,31 +31,21 @@ void mstop()
 {
   digitalWrite(mtpin,LOW);
   digitalWrite(mbpin,LOW);
-  digitalWrite(mlppin,LOW);
-  digitalWrite(mlnpin,LOW);
 }
 
 void mttb() // motor top to buttom
 {
-  digitalWrite(mtpin,LOW);
   digitalWrite(mbpin,HIGH);
-  digitalWrite(mlppin,HIGH);
-  digitalWrite(mlnpin,LOW);
 }
 void mbtt() // motor buttom to top
 {
   digitalWrite(mtpin,HIGH);
-  digitalWrite(mbpin,LOW);
-  digitalWrite(mlppin,LOW);
-  digitalWrite(mlnpin,HIGH);
 }
 
 void setup() {
   Serial.begin(9600);
   pinMode(mtpin,OUTPUT);
   pinMode(mbpin,OUTPUT);
-  pinMode(mlppin,OUTPUT);
-  pinMode(mlnpin,OUTPUT);
   pinMode(sstpin,INPUT);
   pinMode(ssbpin,INPUT);
   pinMode(rlpin,OUTPUT);
