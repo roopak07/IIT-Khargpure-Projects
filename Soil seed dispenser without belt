@@ -29,7 +29,7 @@ void sangle()
 
 {
    servo_obj.write(45);
-   delay(1000);
+   delay(2000);
    servo_obj.write(0);
    delay(200);
 }
@@ -73,7 +73,7 @@ void loop()
   {
    Serial.println("seeds dispencing");
    digitalWrite(gearm,HIGH);
-   delay(1000);
+   delay(300);
    digitalWrite(gearm,LOW);
    delay(1000); // wait for 1 sec
    
