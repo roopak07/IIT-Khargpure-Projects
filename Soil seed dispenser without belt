@@ -3,7 +3,7 @@
 Servo servo_obj; // servo object for fish tank
 
 #define ultras 3 // ultra sonic for soil dispencer
-#define ultragm 11 // ultra sonic for seed dispencer
+#define ultragm 10 // ultra sonic for seed dispencer
 #define servo 9 // servo for sand dispencer
 #define gearm 4// gear motor for seed dispencer
 
@@ -28,7 +28,7 @@ int distance(int x)
 void sangle()
 
 {
-   servo_obj.write(45);
+   servo_obj.write(60);
    delay(2000);
    servo_obj.write(0);
    delay(200);
