@@ -1,9 +1,9 @@
-#define ft1 2; //fish tank transistor 1
-#define ft2 3; //fish tank transistor 2
-#define ct1 4; //chemical tank transistor 1
-#define ct2 5; //chemical tank transistor 2
-#define wt1 6;//water tank transistor 1
-#define wt2 7; //water tank transistor 2
+#define ft1 2 //fish tank transistor 1
+#define ft2 3 //fish tank transistor 2
+#define ct1 4 //chemical tank transistor 1
+#define ct2 5 //chemical tank transistor 2
+#define wt1 6//water tank transistor 1
+#define wt2 7 //water tank transistor 2
 #define fp  8 // fish tank pump
 #define cp  9 // chemical tank pump
 #define wp  10 // water tank pump
@@ -37,29 +37,29 @@ void loop() {
   delay(1);    
   if( ft1_val == 0 &&  ft2_val == 0 )
   {
-    digitalWrite(motor1, HIGH);
+    digitalWrite(fp, HIGH);
   }
   // delay in between reads for stability
   else if(ft1_val == 1 &&  ft2_val == 1)
       {
-    digitalWrite(motor1, LOW);
+    digitalWrite(fp, LOW);
   }
   if( ct1_val == 0 &&  ct2_val == 0 )
   {
-    digitalWrite(motor2, HIGH);
+    digitalWrite(cp, HIGH);
   }
   // delay in between reads for stability
   else if(ct1_val == 1 &&  ct2_val == 1)
       {
-    digitalWrite(motor2, LOW);
+    digitalWrite(cp, LOW);
   }
   if( wt1_val == 0 &&  wt2_val == 0 )
   {
-    digitalWrite(motor3, HIGH);
+    digitalWrite(wp, HIGH);
   }
   // delay in between reads for stability
   else if (wt1_val == 1 &&  wt2_val == 1)
       {
-    digitalWrite(motor3, LOW);
+    digitalWrite(wp, LOW);
   }
 }
