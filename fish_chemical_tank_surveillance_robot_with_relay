@@ -2,14 +2,14 @@
 Servo fservo; // servo object for fish tank
 Servo cservo; // servo object for chemical tank
 /* Motors */
-#define mtpin 2 // Motor top positive pin
-#define mbpin 4 // Motor bottom positive pin
+#define mtpin 4 // Motor top positive pin
+#define mbpin 5 // Motor bottom positive pin
 /* Stopper Switche */
-#define ssrpin 6 // Stoper switch right 
-#define sslpin 7 // Stoper switch left
+#define ssrpin 7 // Stoper switch right 
+#define sslpin 8 // Stoper switch left
 /* servos */
-#define ftspin 9 // fish tank servo
-#define ctspin 10 // chemical tank servo
+#define ftspin 10 // fish tank servo
+#define ctspin 11 // chemical tank servo
 
 int ssr_val,ssl_val;
 
