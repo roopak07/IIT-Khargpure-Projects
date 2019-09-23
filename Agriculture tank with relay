@@ -1,9 +1,9 @@
 /* Motors */
-#define mtpin 4 // Motor top positive pin
-#define mbpin 5 // Motor top negative pin
+#define mtpin 5 // Motor top positive pin
+#define mbpin 6 // Motor top negative pin
 /* Stopper Switche */
-#define sstpin 10 // Stoper switch right 
-#define ssbpin 11 // Stoper switch left
+#define sstpin 11 // Stoper switch right 
+#define ssbpin 12 // Stoper switch left
 /* Ultrasonic sensor */
 #define urpin 7 // ultrasonic sensor right
 #define ulpin 3 // ultrasonic sensor right
@@ -82,4 +82,6 @@ void loop() {
     digitalWrite(llpin, HIGH);
     Serial.println("Left led ON");
   }
+  Serial.println("********************* END ************************");
+  delay(1000);
 }
