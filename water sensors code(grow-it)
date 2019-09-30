@@ -26,39 +26,45 @@ void setup()
 
 void loop() {
   // read the input pin:
- int ft1_val = digitalRead(ft1);
- int ft2_val = digitalRead(ft2);
- int ct1_val = digitalRead(ct1);
- int ct2_val = digitalRead(ct2);
- int wt1_val = digitalRead(wt1);
- int wt2_val = digitalRead(wt2);
+ int ft1_val = !digitalRead(ft1);
+ Serial.println("fish tank transistor_1:"+String(ft1_val));
+ int ft2_val = !digitalRead(ft2);
+ Serial.println("fish tank transistor_2:"+String(ft2_val));
+ int ct1_val = !digitalRead(ct1);
+ Serial.println("Chemical tank transistor_1:"+String(ct1_val));
+ int ct2_val = !digitalRead(ct2);
+ Serial.println("Chemical tank transistor_2:"+String(ct2_val));
+ int wt1_val = !digitalRead(wt1);
+ Serial.println("Water tank transistor_1:"+String(wt1_val));
+ int wt2_val = !digitalRead(wt2);
+ Serial.println("Water tank transistor_2:"+String(wt2_val));
   // print out the state of the button:
 //  Serial.println(ft1_val);
   delay(1);    
-  if( ft1_val == 0 &&  ft2_val == 0 )
+  if( ft1_val == 1 &&  ft2_val == 1 )
   {
     digitalWrite(fp, HIGH);
   }
   // delay in between reads for stability
-  else if(ft1_val == 1 &&  ft2_val == 1)
+  else if(ft1_val == 0 &&  ft2_val == 0)
       {
     digitalWrite(fp, LOW);
   }
-  if( ct1_val == 0 &&  ct2_val == 0 )
+  if( ct1_val == 1 &&  ct2_val == 1 )
   {
     digitalWrite(cp, HIGH);
   }
   // delay in between reads for stability
-  else if(ct1_val == 1 &&  ct2_val == 1)
+  else if(ct1_val == 0 &&  ct2_val == 0)
       {
     digitalWrite(cp, LOW);
   }
-  if( wt1_val == 0 &&  wt2_val == 0 )
+  if( wt1_val == 1 &&  wt2_val == 1 )
   {
     digitalWrite(wp, HIGH);
   }
   // delay in between reads for stability
-  else if (wt1_val == 1 &&  wt2_val == 1)
+  else if (wt1_val == 0 &&  wt2_val == 0)
       {
     digitalWrite(wp, LOW);
   }
