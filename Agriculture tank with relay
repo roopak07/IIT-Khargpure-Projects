@@ -1,15 +1,15 @@
 /* Motors */
-#define mtpin 5 // Motor top positive pin
-#define mbpin 6 // Motor top negative pin
+#define mtpin 4 // Motor top positive pin
+#define mbpin 5 // Motor top negative pin
 /* Stopper Switche */
-#define sstpin 11 // Stoper switch right 
-#define ssbpin 12 // Stoper switch left
+#define sstpin 2 // Stoper switch right 
+#define ssbpin 3 // Stoper switch left
 /* Ultrasonic sensor */
-#define urpin 7 // ultrasonic sensor right
-#define ulpin 3 // ultrasonic sensor right
+#define urpin 6 // ultrasonic sensor right
+#define ulpin 7 // ultrasonic sensor right
 /* led pins */
-#define rlpin 8 // right led
-#define llpin 9 // left led
+#define llpin 8 // left led
+#define rlpin 9 // right led
 
 int sst_val, ssb_val, t, d, dr, dl;
 
@@ -48,12 +48,18 @@ void loop() {
   
   if (sst_val == 1 && ssb_val == 0) // top to buttom
   {
+    digitalWrite(mtpin, LOW);
+    digitalWrite(mbpin, LOW);
+    delay(2000);
     Serial.println("servilance moving from top to buttom");
     digitalWrite(mtpin, LOW);
     digitalWrite(mbpin, HIGH); 
   }
-  else if (sst_val == 0 && ssb_val == 1) // buttom to top
+  if (sst_val == 0 && ssb_val == 1) // buttom to top
   {
+    digitalWrite(mtpin, LOW);
+    digitalWrite(mbpin, LOW);
+    delay(2000);
     Serial.println("servilance moving from buttom to top");
     digitalWrite(mtpin, HIGH);
     digitalWrite(mbpin, LOW);
