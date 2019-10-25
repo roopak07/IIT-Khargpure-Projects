@@ -35,14 +35,13 @@ f_dist=distance(fu_p);
 Serial.println("front Distance : " + String(f_dist)+" cm");
 b_dist=distance(bu_p);
 Serial.println("back Distance : " + String(b_dist)+" cm");
-if(f_dist < 20 || b_dist < 20 )
-{
+if(f_dist < 20)
   digitalWrite(fb_p,HIGH);
-  digitalWrite(bb_p,HIGH);
-}
 else
-{
   digitalWrite(fb_p,LOW);
+  
+if(b_dist < 20)
+  analogWrite(bb_p,200); // tuning buzzer ,pwm pin
+else
   digitalWrite(bb_p,LOW);
-}
 }
