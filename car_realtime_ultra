@@ -17,7 +17,7 @@ delayMicroseconds(10);
 pinMode(pin,INPUT);
 t=pulseIn(pin,HIGH);
 Serial.println("Time taken by the signal : " + String(t)+" ms");
-d=0.0343*t2/2;
+d=0.0343*t/2;
 Serial.println("Distance : " + String(d)+" cm");
 return d;
 }
