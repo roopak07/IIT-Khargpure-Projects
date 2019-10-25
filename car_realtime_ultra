@@ -16,9 +16,9 @@ digitalWrite(pin,LOW);
 delayMicroseconds(10);
 pinMode(pin,INPUT);
 t=pulseIn(pin,HIGH);
-Serial.println("Time taken by the signal : " + String(t)+" ms");
+//Serial.println("Time taken by the signal : " + String(t)+" ms");
 d=0.0343*t/2;
-Serial.println("Distance : " + String(d)+" cm");
+//Serial.println("Distance : " + String(d)+" cm");
 return d;
 }
 
@@ -32,7 +32,9 @@ digitalWrite(bb_p,LOW);
 
 void loop() {
 f_dist=distance(fu_p);
+Serial.println("front Distance : " + String(f_dist)+" cm");
 b_dist=distance(bu_p);
+Serial.println("back Distance : " + String(b_dist)+" cm");
 if(f_dist < 20 || b_dist < 20 )
 {
   digitalWrite(fb_p,HIGH);
