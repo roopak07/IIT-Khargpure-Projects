@@ -13,8 +13,9 @@ ESP8266 wifi(&EspSerial);
 #define fbutton_p 3
 #define bbutton_p 4
 #define relay_p 5
-#define mled_p 3
-#define aled_p 4
+#define mled_p 6
+#define aled_p 7
+#define sled_p 8
 
 int mic_analog_v,mic_digital_v,alchol_v,fbutton_v,bbutton_v;
 
@@ -33,10 +34,12 @@ void setup()
  pinMode(mled_p,OUTPUT);
  pinMode(aled_p,OUTPUT);
  pinMode(relay_p,OUTPUT);
+ pinMode(sled_p,OUTPUT);
  
  digitalWrite(mled_p,LOW); 
  digitalWrite(aled_p,LOW); 
  digitalWrite(relay_p,LOW);
+ digitalWrite(sled_p,LOW);
 //wifi module
   EspSerial.begin(ESP8266_BAUD);
   delay(10);
@@ -49,6 +52,12 @@ void setup()
 
 void sendSensor()
 {
+  bool online_status = Blynk.connected();
+  Serial.println("Online Status: "+String(online_status));
+  if(online_status==1)  // indication for online
+   digitalWrite(sled_p,HIGH); 
+  else
+    digitalWrite(sled_p,LOW);
   mic_digital_v=digitalRead(micd_p);
   mic_analog_v=digitalRead(mica_p); 
   Serial.println(mic_analog_v);
